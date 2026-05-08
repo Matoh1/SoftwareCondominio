@@ -2,18 +2,14 @@ package com.example.Gestion.DTO;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@Builder
-@NoArgsConstructor
 @Data
 public class RegionDTO {
 
     private Integer id;
+    @NotBlank(message = "El nombre no puede estar vacío")
     private String nombre;
     private List<String> comunas;
 

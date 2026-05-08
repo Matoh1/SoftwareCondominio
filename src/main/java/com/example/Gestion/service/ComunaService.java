@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class ComunaService {
 
     private final ComunaRepository comunaRepository;
-    private final ResidenciaRepository residenciaRepository; 
+    private final ResidenciaRepository residenciaRepository;
 
     public List<ComunaDTO> obtenerTodos() {
         return comunaRepository.findAll().stream()
@@ -35,11 +35,10 @@ public class ComunaService {
         return convertirADTO(comuna);
     }
 
-
     public Comuna guardarComuna(Comuna comuna) {
         return comunaRepository.save(comuna);
     }
-    
+
     public String añadirResidenciaAComuna(Integer comunaId, Integer residenciaId) {
         Comuna comuna = comunaRepository.findById(comunaId)
                 .orElseThrow(() -> new RuntimeException("Comuna no encontrada con ID " + comunaId));

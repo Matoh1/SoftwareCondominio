@@ -16,6 +16,8 @@ import com.example.Gestion.DTO.RegionDTO;
 import com.example.Gestion.model.Region;
 import com.example.Gestion.service.RegionService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/region")
 public class RegionController {
@@ -43,7 +45,7 @@ public class RegionController {
     }
 
     @PostMapping
-    public ResponseEntity<Region> agregarRegion(@RequestBody Region region) {
+    public ResponseEntity<Region> agregarRegion(@Valid @RequestBody Region region) {
         try {
             Region nuevaRegion = regionService.guardarRegion(region);
             return new ResponseEntity<>(nuevaRegion, HttpStatus.CREATED);
