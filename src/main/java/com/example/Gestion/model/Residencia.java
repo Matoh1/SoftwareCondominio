@@ -28,7 +28,6 @@ public class Residencia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Residencia_ID")
     private Integer id;
 
     @NotBlank(message = "EL nombre no puede estar vacio")

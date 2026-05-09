@@ -26,7 +26,6 @@ public class Region {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Region_ID")
     private Integer id;
 
     @NotBlank(message = "La Region es obligatoria")

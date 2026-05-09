@@ -28,7 +28,6 @@ public class Comuna {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Comuna_ID")
     private Integer id;
 
     @NotBlank(message = "El Nombre es obligatorio")
