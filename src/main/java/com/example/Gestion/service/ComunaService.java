@@ -2,7 +2,6 @@ package com.example.Gestion.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -53,7 +52,7 @@ public class ComunaService {
     public String eliminarResidenciaDeComuna(Integer comunaId, Integer residenciaId) {
         Residencia residencia = residenciaRepository.findById(residenciaId)
                 .orElseThrow(() -> new RuntimeException("La residencia no existe."));
-        if (residencia.getComuna() != null && residencia.getComuna().getComuna_ID().equals(comunaId)) {
+        if (residencia.getComuna() != null && residencia.getComuna().getId().equals(comunaId)) {
             residencia.setComuna(null);
             residenciaRepository.save(residencia);
             return "La residencia ha sido eliminada de la comuna exitosamente.";
@@ -61,26 +60,32 @@ public class ComunaService {
         return "Error: La residencia no pertenece a esa comuna, no puedes eliminarla.";
     }
 
+    public String eliminar(Integer id) {
+        if (comunaRepository.existsById(id)) {
+            comunaRepository.deleteById(id);
+            return "Comuna eliminada exitosamente";
+        }
+        return "No se encontro la Comuna con la ID " + id;
+    }
+
     private ComunaDTO convertirADTO(Comuna comuna) {
         ComunaDTO dto = new ComunaDTO();
-        dto.setId(comuna.getComuna_ID());
-        dto.setNombre(comuna.getNombre_Comuna());
+        dto.setId(comuna.getId());
+        dto.setNombre(comuna.getNombrecomuna());
 
         if (comuna.getRegion() != null) {
-            dto.setRegionId(comuna.getRegion().getRegion_ID());
-            dto.setNombreRegion(comuna.getRegion().getNombre_Region());
+            dto.setRegionId(comuna.getRegion().getId());
+            dto.setNombreRegion(comuna.getRegion().getNombreregion());
         }
 
-        // Mapeo corregido: Extrae nombres de la lista de residencias
+        // Extrae nombres de la lista de residencias
+        List<String> nombresResidencias = new ArrayList<>();
         if (comuna.getResidencias() != null) {
-            List<String> nombresResidencias = comuna.getResidencias().stream()
-                    .map(Residencia::getNombre_Residencia)
-                    .collect(Collectors.toList());
-            dto.setResidencia(nombresResidencias);
-        } else {
-            dto.setResidencia(new ArrayList<>());
+            for (Residencia nexo : comuna.getResidencias()) {
+                nombresResidencias.add(nexo.getNombreresidencia());
+            }
         }
-
+        dto.setResidencia(nombresResidencias);
         return dto;
     }
 }

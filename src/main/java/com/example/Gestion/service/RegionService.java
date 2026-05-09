@@ -48,15 +48,24 @@ public class RegionService {
         return "Comuna añadida a la región exitosamente";
     }
 
+    public String eliminar(Integer id) {
+        if (regionRepository.existsById(id)) {
+            regionRepository.deleteById(id);
+            return "Region eliminada exitosamente";
+        }
+        return "No se encontro la Region con la ID " + id;
+    }
+
     private RegionDTO convertirADTO(Region region) {
         RegionDTO dto = new RegionDTO();
-        dto.setId(region.getRegion_ID());
-        dto.setNombre(region.getNombre_Region());
+        dto.setId(region.getId());
+        dto.setNombre(region.getNombreregion());
 
-        // Mapeo de los nombres de las comunas relacionadas a la región
         List<String> nombresComunas = new ArrayList<>();
         if (region.getComunas() != null) {
-            nombresComunas = region.getComunas().stream().map(Comuna::getNombre_Comuna).toList();
+            for (Comuna comuna : region.getComunas()) {
+                nombresComunas.add(comuna.getNombrecomuna());
+            }
         }
         dto.setComunas(nombresComunas);
         return dto;

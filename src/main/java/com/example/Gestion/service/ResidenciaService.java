@@ -26,7 +26,7 @@ public class ResidenciaService {
 
     public ResidenciaDTO buscarporID(Integer id) {
         Residencia residencia = residenciaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Residencia no encontrada con ID "));
+                .orElseThrow(() -> new RuntimeException("Residencia no encontrada con ID " + id));
         return convertirADTO(residencia);
     }
 
@@ -39,16 +39,17 @@ public class ResidenciaService {
             Residencia residencia = residenciaRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Residencia no encontrada con ID " + id));
             residenciaRepository.delete(residencia);
-            return "Residencia'" + residencia.getNombre_Residencia() + "' eliminada exitosamente.";
+            return "Residencia'" + residencia.getNombreresidencia() + "' eliminada exitosamente.";
         } catch (Exception e) {
             return e.getMessage();
         }
     }
 
-    public Residencia actualizarResidencia(Integer id, Residencia Aresidencia){
-        Residencia resi = residenciaRepository.findById(id).orElseThrow(() -> new RuntimeException("Residencia no encontrada con ID " + id));
-        if (Aresidencia.getNombre_Residencia() != null) {
-            resi.setNombre_Residencia(Aresidencia.getNombre_Residencia());
+    public Residencia actualizarResidencia(Integer id, Residencia Aresidencia) {
+        Residencia resi = residenciaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Residencia no encontrada con ID " + id));
+        if (Aresidencia.getNombreresidencia() != null) {
+            resi.setNombreresidencia(Aresidencia.getNombreresidencia());
         }
         if (Aresidencia.getDireccion() != null) {
             resi.setDireccion(Aresidencia.getDireccion());
@@ -58,14 +59,14 @@ public class ResidenciaService {
 
     private ResidenciaDTO convertirADTO(Residencia residencia) {
         ResidenciaDTO dto = new ResidenciaDTO();
-        dto.setId(residencia.getResidencia_ID());
-        dto.setNombre(residencia.getNombre_Residencia());
+        dto.setId(residencia.getId());
+        dto.setNombre(residencia.getNombreresidencia());
         dto.setDireccion(residencia.getDireccion());
 
         // Mapeo de los datos de la Comuna relacionada a la residencia
         if (residencia.getComuna() != null) {
-            dto.setComunaId(residencia.getComuna().getComuna_ID());
-            dto.setNombreComuna(residencia.getComuna().getNombre_Comuna());
+            dto.setComunaId(residencia.getComuna().getId());
+            dto.setNombreComuna(residencia.getComuna().getNombrecomuna());
         }
         return dto;
     }
