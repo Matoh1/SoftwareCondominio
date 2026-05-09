@@ -27,12 +27,12 @@ public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Region_ID")
-    private Integer Region_ID;
+    private Integer id;
 
     @NotBlank(message = "La Region es obligatoria")
     @Size(min = 5, max = 50, message = "La Region debe tener al menos 5 caracteres")
-    @Column(nullable = false, length = 50)
-    private String Nombre_Region;
+    @Column(name = "Nombre_Region", nullable = false, length = 50)
+    private String nombreregion;
 
     @OneToMany(mappedBy = "region")
     private List<Comuna> comunas;

@@ -29,26 +29,25 @@ public class Espacio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "espacio_ID")
-    private Integer espacio_ID;
+    @Column(name = "Espacio_ID") // Ajustado a Mayúscula inicial como tu esquema
+    private Integer id;
 
     @NotBlank(message = "El nombre del lugar es obligatorio")
     @Size(min = 5, max = 40, message = "El nombre del lugar debe contener entre 5 y 40 caracteres")
-    @Column(nullable = false, length = 100)
-    private String nombre_lugar;
+    @Column(name = "Nombre_Espacio", nullable = false, length = 100) // Mapeamos al nombre del esquema
+    private String nombrelugar;
 
     @NotBlank(message = "El tipo de espacio es obligatorio")
     @Size(min = 3, max = 30, message = "El tipo de espacio debe contener entre 3 y 30 caracteres")
-    @Column(nullable = false, length = 100)
-    private String tipo_espacio;
+    @Column(name = "Tipo_Espacio", nullable = false, length = 100)
+    private String tipoespacio;
 
     @NotNull(message = "La capacidad es obligatoria")
     @Min(value = 1, message = "La capacidad mínima es 1")
-    @Max(value = 150, message = "La capacidad máxima de seres humanos es de 150")
-    @Column(nullable = false, length = 50)
+    @Max(value = 150, message = "La capacidad máxima es de 150")
+    @Column(name = "Capacidad", nullable = false)
     private Integer capacidad;
 
     @OneToMany(mappedBy = "espacio")
     private List<Espacios> espacios;
-
 }

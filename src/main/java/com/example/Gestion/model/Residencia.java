@@ -28,22 +28,24 @@ public class Residencia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Residencia_ID;
+    @Column(name = "Residencia_ID")
+    private Integer id;
 
     @NotBlank(message = "EL nombre no puede estar vacio")
     @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres")
-    private String Nombre_Residencia;
+    @Column(name = "Nombre_Residencia", nullable = false, length = 50)
+    private String nombreresidencia;
 
     @NotBlank(message = "La Direccion es obligatoria")
     @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres")
-    @Column(nullable = false, length = 50)
-    private String Direccion;
+    @Column(name = "Direccion", nullable = false, length = 50)
+    private String direccion;
 
     @ManyToOne
     @JoinColumn(name = "Comuna_ID")
     private Comuna comuna;
 
     @OneToMany(mappedBy = "residencia")
-    private List<Residencias> residencias;
+    private List<Residencias> asignaciones;
 
 }

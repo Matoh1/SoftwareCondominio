@@ -28,12 +28,13 @@ public class Comuna {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Comuna_ID;
+    @Column(name = "Comuna_ID")
+    private Integer id;
 
     @NotBlank(message = "El Nombre es obligatorio")
     @Size(min = 5, max = 50, message = "El nombre de la comuna debe tener entre 5 y 50 caracteres")
-    @Column(nullable = false, length = 50)
-    private String Nombre_Comuna;
+    @Column(name = "Nombre_Comuna", nullable = false, length = 50)
+    private String nombrecomuna;
 
     @ManyToOne
     @JoinColumn(name = "region_id", nullable = false)

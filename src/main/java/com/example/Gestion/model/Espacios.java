@@ -19,18 +19,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "Espacios")
-
 public class Espacios {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "espacios_ID")
-    private Integer espacios_ID;
+    @Column(name = "Espacios_ID")
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "Espacio_ID", nullable = false)
     private Espacio espacio;
-
     @ManyToOne
     @JoinColumn(name = "Residencia_ID", nullable = false)
-    private Residencias residencia;
+    private Residencia residencia;
 }
