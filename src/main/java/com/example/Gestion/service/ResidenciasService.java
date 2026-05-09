@@ -40,7 +40,7 @@ public class ResidenciasService {
     }
 
     public String eliminarUsuarioDeResidencia(Integer residenciaId, Integer userId) {
-        Residencias asignacion = residenciasRepository.findByResidencia_ResidenciaIdAndUser_UserId(residenciaId, userId)
+        Residencias asignacion = residenciasRepository.findByResidencia_IdAndUser_Id(residenciaId, userId)
                 .orElseThrow(() -> new RuntimeException("Error: El vínculo no existe."));
         if (asignacion.getResidencia() != null && asignacion.getResidencia().getAsignaciones().equals(residenciaId)) {
             residenciasRepository.delete(asignacion);
@@ -57,7 +57,7 @@ public class ResidenciasService {
     }
 
     public List<ResidenciasDTO> obtenerAsignacionesPorUsuario(Integer userId) {
-        return residenciasRepository.findByUser_UserId(userId).stream()
+        return residenciasRepository.findByUser_Id(userId).stream()
                 .map(this::convertirADTO)
                 .toList();
     }
