@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EspaciosDTO {
-    private Integer Espacio_ID;
-    private Integer Residencia_ID;
+
+    private Integer id;
+    private Integer espacioId;
+    private Integer residenciaId;
 }
