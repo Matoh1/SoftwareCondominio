@@ -62,8 +62,7 @@ public class ResidenciaController {
 
     // Endpoint para actualizar una residencia por ID
     @PatchMapping("/{id}")
-    public ResponseEntity<Residencia> actualizarResidencia(@PathVariable Integer id,
-            @Valid @RequestBody Residencia residencia) {
+    public ResponseEntity<Residencia> actualizarResidencia(@PathVariable Integer id, @Valid @RequestBody Residencia residencia) {
         try {
             Residencia res = residenciaService.actualizarResidencia(id, residencia);
             return new ResponseEntity<>(res, HttpStatus.OK);
