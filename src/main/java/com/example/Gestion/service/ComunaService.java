@@ -75,14 +75,14 @@ public class ComunaService {
 
         if (comuna.getRegion() != null) {
             dto.setRegionId(comuna.getRegion().getId());
-            dto.setNombreRegion(comuna.getRegion().getNombreregion());
+            dto.setRegion(comuna.getRegion().getNombreregion());
         }
 
         // Extrae nombres de la lista de residencias
         List<String> nombresResidencias = new ArrayList<>();
         if (comuna.getResidencias() != null) {
             for (Residencia nexo : comuna.getResidencias()) {
-                nombresResidencias.add(nexo.getNombreresidencia());
+                nombresResidencias.add(nexo.getNombre());
             }
         }
         dto.setResidencia(nombresResidencias);
