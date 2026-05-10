@@ -73,11 +73,11 @@ public class EspaciosService {
         dto.setId(espacios.getId());
 
         if (espacios.getEspacio() != null) {
-            dto.setEspacioId(espacios.getEspacio().getId());
+            dto.setEspacio(espacios.getEspacio().getNombre());
         }
 
         if (espacios.getResidencia() != null) {
-            dto.setResidenciaId(espacios.getResidencia().getId());
+            dto.setResidencia(espacios.getResidencia().getNombre());
         }
         return dto;
     }
