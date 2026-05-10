@@ -89,7 +89,7 @@ public class UserService {
 
         if (user.getResidencias() != null) {
             Lresidencias = user.getResidencias().stream()
-                    .map(res -> res.getResidencia().getNombreresidencia())
+                    .map(res -> res.getResidencia().getNombre())
                     .toList();
         }
 
