@@ -33,7 +33,7 @@ public class Residencia {
     @NotBlank(message = "EL nombre no puede estar vacio")
     @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres")
     @Column(name = "Nombre_Residencia", nullable = false, length = 50)
-    private String nombreresidencia;
+    private String nombre;
 
     @NotBlank(message = "La Direccion es obligatoria")
     @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres")

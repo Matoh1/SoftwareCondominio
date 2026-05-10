@@ -35,12 +35,12 @@ public class Espacio {
     @NotBlank(message = "El nombre del lugar es obligatorio")
     @Size(min = 5, max = 40, message = "El nombre del lugar debe contener entre 5 y 40 caracteres")
     @Column(name = "Nombre_Espacio", nullable = false, length = 100) // Mapeamos al nombre del esquema
-    private String nombrelugar;
+    private String nombre;
 
     @NotBlank(message = "El tipo de espacio es obligatorio")
     @Size(min = 3, max = 30, message = "El tipo de espacio debe contener entre 3 y 30 caracteres")
     @Column(name = "Tipo_Espacio", nullable = false, length = 100)
-    private String tipoespacio;
+    private String tipo;
 
     @NotNull(message = "La capacidad es obligatoria")
     @Min(value = 1, message = "La capacidad mínima es 1")
