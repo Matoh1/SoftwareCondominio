@@ -39,7 +39,7 @@ public class ResidenciaService {
             Residencia residencia = residenciaRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Residencia no encontrada con ID " + id));
             residenciaRepository.delete(residencia);
-            return "Residencia'" + residencia.getNombreresidencia() + "' eliminada exitosamente.";
+            return "Residencia'" + residencia.getNombre() + "' eliminada exitosamente.";
         } catch (Exception e) {
             return e.getMessage();
         }
@@ -48,8 +48,8 @@ public class ResidenciaService {
     public Residencia actualizarResidencia(Integer id, Residencia Aresidencia) {
         Residencia resi = residenciaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Residencia no encontrada con ID " + id));
-        if (Aresidencia.getNombreresidencia() != null) {
-            resi.setNombreresidencia(Aresidencia.getNombreresidencia());
+        if (Aresidencia.getNombre() != null) {
+            resi.setNombre(Aresidencia.getNombre());
         }
         if (Aresidencia.getDireccion() != null) {
             resi.setDireccion(Aresidencia.getDireccion());
@@ -60,7 +60,7 @@ public class ResidenciaService {
     private ResidenciaDTO convertirADTO(Residencia residencia) {
         ResidenciaDTO dto = new ResidenciaDTO();
         dto.setId(residencia.getId());
-        dto.setNombre(residencia.getNombreresidencia());
+        dto.setNombre(residencia.getNombre());
         dto.setDireccion(residencia.getDireccion());
 
         // Mapeo de los datos de la Comuna relacionada a la residencia
