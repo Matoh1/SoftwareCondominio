@@ -77,19 +77,18 @@ public class EspacioService {
     private EspacioDTO convertirADTO(Espacio espacio) {
         EspacioDTO dto = new EspacioDTO();
         dto.setId(espacio.getId());
-        dto.setNombrelugar(espacio.getNombrelugar());
-        dto.setTipoespacio(espacio.getTipoespacio());
+
+        dto.setNombre(espacio.getNombre());
+        dto.setTipo(espacio.getTipo());
         dto.setCapacidad(espacio.getCapacidad());
 
-        List<String> nombresResidencias = new ArrayList<>();
-
         if (espacio.getEspacios() != null) {
-            nombresResidencias = espacio.getEspacios().stream()
-                    .map(rel -> rel.getResidencia().getNombreresidencia())
-                    .toList();
+            dto.setEspacios(espacio.getEspacios().stream()
+                    .map(rel -> rel.getResidencia().getNombre())
+                    .toList());
+        } else {
+            dto.setEspacios(new ArrayList<>());
         }
-
-        dto.setEspacios(nombresResidencias);
 
         return dto;
     }
