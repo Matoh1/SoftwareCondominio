@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Gestion.DTO.EspaciosDTO;
-import com.example.Gestion.model.Espacios;
 import com.example.Gestion.service.EspaciosService;
 
 @RestController
@@ -43,12 +42,12 @@ public class EspaciosController {
     }
 
     @PostMapping("/{espacioId}/{residenciaId}")
-    public ResponseEntity<Espacios> relacionar(@PathVariable Integer espacioId, @PathVariable Integer residenciaId) {
+    public ResponseEntity<String> relacionar(@PathVariable Integer espacioId, @PathVariable Integer residenciaId) {
         try {
-            Espacios nVinculo = espaciosService.guardarEspacios(espacioId, residenciaId);
-            return new ResponseEntity<>(nVinculo, HttpStatus.CREATED);
+            espaciosService.guardarEspacios(espacioId, residenciaId);
+            return new ResponseEntity<>("Vinculación realizada correctamente", HttpStatus.CREATED);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Error al vincular: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
