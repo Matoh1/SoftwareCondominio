@@ -36,18 +36,15 @@ public class ResidenciasService {
         residenciasRepository.save(asignacion);
 
         return "El usuario '" + usuario.getNombre() + "' ahora vive en la residencia: "
-                + residencia.getNombreresidencia();
+                + residencia.getNombre();
     }
 
     public String eliminarUsuarioDeResidencia(Integer residenciaId, Integer userId) {
         Residencias asignacion = residenciasRepository.findByResidencia_IdAndUser_Id(residenciaId, userId)
                 .orElseThrow(() -> new RuntimeException("Error: El vínculo no existe."));
-        if (asignacion.getResidencia() != null && asignacion.getResidencia().getAsignaciones().equals(residenciaId)) {
-            residenciasRepository.delete(asignacion);
-            return "El usuario ha sido desvinculado de la residencia y ahora no tiene hogar asignado.";
-        }
+        residenciasRepository.delete(asignacion);
+        return "El usuario ha sido desvinculado de la residencia y ahora no tiene hogar asignado.";
 
-        return "Error: El usuario no pertenece a esa residencia, no puedes expulsarlo.";
     }
 
     public List<ResidenciasDTO> obtenerTodasLasAsignaciones() {
@@ -74,7 +71,7 @@ public class ResidenciasService {
         // Datos de la Residencia
         if (residencias.getResidencia() != null) {
             dto.setResidenciaId(residencias.getResidencia().getId());
-            dto.setNombreResidencia(residencias.getResidencia().getNombreresidencia());
+            dto.setNombreResidencia(residencias.getResidencia().getNombre());
         }
 
         return dto;
